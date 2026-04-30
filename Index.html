@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piggy Says</title>
+  <style>
+    :root {
+      --primary: #8B00FF;
+      --accent: #FF00AA;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f0f0f;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), #6a00cc);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(139, 0, 255, 0.3);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 4px solid white;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      color: #ffccff;
+      font-size: 1.1rem;
+    }
+
+    main {
+      padding: 20px;
+      min-height: calc(100vh - 180px);
+    }
+
+    .section {
+      display: none;
+      padding: 20px 0;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .empty-placeholder {
+      text-align: center;
+      padding: 60px 20px;
+      color: #888;
+      font-size: 1.1rem;
+      border: 2px dashed #444;
+      border-radius: 16px;
+      margin: 20px 0;
+    }
+
+    /* YouTube Section - Fixed */
+    .youtube-section {
+      text-align: center;
+    }
+
+    .youtube-section img {
+      width: 100%;
+      max-width: 620px;
+      border-radius: 16px;
+      margin: 20px auto;
+      display: block;
+      box-shadow: 0 10px 30px rgba(255, 0, 170, 0.4);
+      border: 3px solid #FF00AA;
+    }
+
+    .yt-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #FF0000;
+      color: white;
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+    }
+
+    .yt-btn:hover {
+      transform: scale(1.08);
+      background: #cc0000;
+      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
+    }
+
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 15, 15, 0.97);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid #333;
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0 4px;
+      z-index: 1000;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #aaa;
+      font-size: 0.85rem;
+      padding: 6px;
+    }
+
+    .nav-item.active {
+      color: var(--accent);
+    }
+
+    .nav-item i {
+      font-size: 1.7rem;
+      margin-bottom: 3px;
+    }
+
+    @media (min-width: 768px) {
+      .bottom-nav { display: none; }
+      .sidebar { 
+        display: block; 
+        position: fixed;
+        left: 0; top: 0; bottom: 0;
+        width: 260px;
+        background: #1a1a1a;
+        padding: 30px 20px;
+        border-right: 1px solid #333;
+      }
+      main { margin-left: 260px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="/attachments/IMG_20260429_225824.jpg" alt="Piggy Says Logo">
+      <div>
+        <h1>Piggy Says</h1>
+        <p class="subtitle">sub!</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Home -->
+    <div id="home" class="section active">
+      <div class="empty-placeholder">
+        <h2>Welcome to Piggy Says! 🐷</h2>
+        <p>Main content coming soon...</p>
+      </div>
+    </div>
+
+    <!-- Events -->
+    <div id="events" class="section">
+      <div class="empty-placeholder">
+        <h2>Upcoming Events 🎉</h2>
+        <p>Event schedule coming soon!</p>
+      </div>
+    </div>
+
+    <!-- YouTube Section (Fixed) -->
+    <div id="youtube" class="section">
+      <div class="youtube-section">
+        <h2>Watch Piggy on YouTube</h2>
+        
+        <!-- Your Piggy Says image - using the uploaded file -->
+        <img src="/attachments/IMG_20260429_225824.jpg" 
+             alt="Piggy Says" 
+             onerror="this.src='https://via.placeholder.com/600x400/8B00FF/FFFFFF?text=Piggy+Says';">
+
+        <a href="https://youtube.com/@PagPagsays" target="_blank" class="yt-btn">
+          ▶️ Subscribe to @PagPagsays
+        </a>
+
+        <p style="margin-top: 15px; color: #ccc;">
+          Join the fun — new videos dropping regularly!
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom Navigation (Mobile) -->
+  <nav class="bottom-nav">
+    <div class="nav-item active" data-tab="home">🏠<br><span>Home</span></div>
+    <div class="nav-item" data-tab="events">🎉<br><span>Events</span></div>
+    <div class="nav-item" data-tab="youtube">📺<br><span>YouTube</span></div>
+  </nav>
+
+  <script>
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('.section');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const tab = item.getAttribute('data-tab');
+
+        navItems.forEach(nav => nav.classList.remove('active'));
+        sections.forEach(sec => sec.classList.remove('active'));
+
+        item.classList.add('active');
+        document.getElementById(tab).classList.add('active');
+      });
+    });
+
+    // Handle larger screens (consoles / tablets)
+    function handleResize() {
+      const isLarge = window.innerWidth >= 768;
+      document.querySelector('.bottom-nav').style.display = isLarge ? 'none' : 'flex';
+      // You can add sidebar logic here later if needed
+    }
+
+    window.addEventListener('load', () => {
+      handleResize();
+      window.addEventListener('resize', handleResize);
+    });
+  </script>
+</body>
+</html>
