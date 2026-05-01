@@ -1,247 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Piggy Says</title>
-  <style>
-    :root {
-      --primary: #8B00FF;
-      --accent: #FF00AA;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piggy Says</title>
+    <style>
+        :root {
+            --primary: #8B00FF;
+            --accent: #FF00AA;
+            --sidebar-bg: #1a1a1a;
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0f0f0f;
-      color: white;
-      min-height: 100vh;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    header {
-      background: linear-gradient(135deg, var(--primary), #6a00cc);
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(139, 0, 255, 0.3);
-    }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0f0f0f;
+            color: white;
+            min-height: 100vh;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 10px;
-    }
+        /* PC Sidebar - Hidden on mobile */
+        .sidebar {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 260px;
+            background: var(--sidebar-bg);
+            padding: 30px 20px;
+            border-right: 1px solid #333;
+            z-index: 1100;
+        }
 
-    .logo img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 4px solid white;
-    }
+        .sidebar .logo-area {
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-    h1 {
-      font-size: 2.2rem;
-      font-weight: bold;
-    }
+        .sidebar .logo-area img {
+            width: 120px;
+            height: 120px;
+            border-radius: 20px; /* Matching the logo style */
+            border: 3px solid var(--accent);
+        }
 
-    .subtitle {
-      color: #ffccff;
-      font-size: 1.1rem;
-    }
+        .sidebar-nav {
+            list-style: none;
+        }
 
-    main {
-      padding: 20px;
-      min-height: calc(100vh - 180px);
-    }
+        .sidebar-nav li {
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+            color: #aaa;
+        }
 
-    .section {
-      display: none;
-      padding: 20px 0;
-    }
+        .sidebar-nav li:hover {
+            background: #252525;
+            color: white;
+        }
 
-    .section.active {
-      display: block;
-    }
+        .sidebar-nav li.active {
+            background: var(--primary);
+            color: white;
+        }
 
-    .empty-placeholder {
-      text-align: center;
-      padding: 60px 20px;
-      color: #888;
-      font-size: 1.1rem;
-      border: 2px dashed #444;
-      border-radius: 16px;
-      margin: 20px 0;
-    }
+        header {
+            background: linear-gradient(135deg, var(--primary), #6a00cc);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(139, 0, 255, 0.3);
+        }
 
-    /* YouTube Section - Fixed */
-    .youtube-section {
-      text-align: center;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
 
-    .youtube-section img {
-      width: 100%;
-      max-width: 620px;
-      border-radius: 16px;
-      margin: 20px auto;
-      display: block;
-      box-shadow: 0 10px 30px rgba(255, 0, 170, 0.4);
-      border: 3px solid #FF00AA;
-    }
+        .logo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            border: 4px solid white;
+        }
 
-    .yt-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: #FF0000;
-      color: white;
-      padding: 16px 32px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin: 20px 0;
-      transition: all 0.3s ease;
-    }
+        h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
 
-    .yt-btn:hover {
-      transform: scale(1.08);
-      background: #cc0000;
-      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.4);
-    }
+        .subtitle {
+            color: #ffccff;
+            font-size: 1.1rem;
+        }
 
-    /* Bottom Navigation */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(15, 15, 15, 0.97);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid #333;
-      display: flex;
-      justify-content: space-around;
-      padding: 8px 0 4px;
-      z-index: 1000;
-    }
+        main {
+            padding: 20px;
+            min-height: calc(100vh - 180px);
+            transition: margin-left 0.3s;
+        }
 
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      color: #aaa;
-      font-size: 0.85rem;
-      padding: 6px;
-    }
+        .section {
+            display: none;
+            padding: 20px 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-    .nav-item.active {
-      color: var(--accent);
-    }
+        .section.active {
+            display: block;
+        }
 
-    .nav-item i {
-      font-size: 1.7rem;
-      margin-bottom: 3px;
-    }
+        .empty-placeholder {
+            text-align: center;
+            padding: 60px 20px;
+            color: #888;
+            font-size: 1.1rem;
+            border: 2px dashed #444;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
 
-    @media (min-width: 768px) {
-      .bottom-nav { display: none; }
-      .sidebar { 
-        display: block; 
-        position: fixed;
-        left: 0; top: 0; bottom: 0;
-        width: 260px;
-        background: #1a1a1a;
-        padding: 30px 20px;
-        border-right: 1px solid #333;
-      }
-      main { margin-left: 260px; }
-    }
-  </style>
+        /* YouTube Embed Styling */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(255, 0, 170, 0.4);
+            border: 3px solid #FF00AA;
+            margin: 20px 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .yt-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #FF0000;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .yt-btn:hover {
+            transform: scale(1.08);
+            background: #cc0000;
+        }
+
+        /* Bottom Navigation (Mobile) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 15, 0.97);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #333;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 4px;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #aaa;
+            font-size: 0.85rem;
+            padding: 6px;
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: var(--accent);
+        }
+
+        /* Desktop Adjustments */
+        @media (min-width: 768px) {
+            .bottom-nav {
+                display: none;
+            }
+            .sidebar {
+                display: block;
+            }
+            main {
+                margin-left: 260px;
+            }
+            header {
+                margin-left: 260px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="/attachments/IMG_20260429_225824.jpg" alt="Piggy Says Logo">
-      <div>
-        <h1>Piggy Says</h1>
-        <p class="subtitle">sub!</p>
-      </div>
-    </div>
-  </header>
+    <nav class="sidebar">
+        <div class="logo-area">
+            <img src="Screenshot 2026-03-22 131130.png" alt="Piggy Says Logo">
+            <h2 style="margin-top: 15px; color: var(--accent);">Piggy Says</h2>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="active" data-tab="home"><span>🏠</span> Home</li>
+            <li data-tab="events"><span>🎉</span> Events</li>
+            <li data-tab="youtube"><span>📺</span> YouTube</li>
+        </ul>
+    </nav>
 
-  <main>
-    <!-- Home -->
-    <div id="home" class="section active">
-      <div class="empty-placeholder">
-        <h2>Welcome to Piggy Says! 🐷</h2>
-        <p>Main content coming soon...</p>
-      </div>
-    </div>
+    <header>
+        <div class="logo">
+            <img src="Screenshot 2026-03-22 131130.png" alt="Piggy Says Logo">
+            <h1>Piggy Says</h1>
+        </div>
+        <p class="subtitle">Welcome to the sub!</p>
+    </header>
 
-    <!-- Events -->
-    <div id="events" class="section">
-      <div class="empty-placeholder">
-        <h2>Upcoming Events 🎉</h2>
-        <p>Event schedule coming soon!</p>
-      </div>
-    </div>
+    <main>
+        <section id="home" class="section active">
+            <h2>Welcome to Piggy Says! 🐷</h2>
+            <div class="empty-placeholder">
+                Main content coming soon...
+            </div>
+        </section>
 
-    <!-- YouTube Section (Fixed) -->
-    <div id="youtube" class="section">
-      <div class="youtube-section">
-        <h2>Watch Piggy on YouTube</h2>
-        
-        <!-- Your Piggy Says image - using the uploaded file -->
-        <img src="/attachments/IMG_20260429_225824.jpg" 
-             alt="Piggy Says" 
-             onerror="this.src='https://via.placeholder.com/600x400/8B00FF/FFFFFF?text=Piggy+Says';">
+        <section id="events" class="section">
+            <h2>Upcoming Events 🎉</h2>
+            <div class="empty-placeholder">
+                Event schedule coming soon!
+            </div>
+        </section>
 
-        <a href="https://youtube.com/@PagPagsays" target="_blank" class="yt-btn">
-          ▶️ Subscribe to @PagPagsays
-        </a>
+        <section id="youtube" class="section" style="text-align: center;">
+            <h2>Watch Piggy on YouTube</h2>
+            
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed?listType=user_uploads&list=PagPagsays" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
 
-        <p style="margin-top: 15px; color: #ccc;">
-          Join the fun — new videos dropping regularly!
-        </p>
-      </div>
-    </div>
-  </main>
+            <a href="https://youtube.com/@PagPagsays" class="yt-btn" target="_blank">
+                ▶️ Subscribe to @PagPagsays
+            </a>
+            <p>Join the fun — new videos dropping regularly!</p>
+        </section>
+    </main>
 
-  <!-- Bottom Navigation (Mobile) -->
-  <nav class="bottom-nav">
-    <div class="nav-item active" data-tab="home">🏠<br><span>Home</span></div>
-    <div class="nav-item" data-tab="events">🎉<br><span>Events</span></div>
-    <div class="nav-item" data-tab="youtube">📺<br><span>YouTube</span></div>
-  </nav>
+    <nav class="bottom-nav">
+        <div class="nav-item active" data-tab="home">
+            <span>🏠</span>
+            Home
+        </div>
+        <div class="nav-item" data-tab="events">
+            <span>🎉</span>
+            Events
+        </div>
+        <div class="nav-item" data-tab="youtube">
+            <span>📺</span>
+            YouTube
+        </div>
+    </nav>
 
-  <script>
-    const navItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('.section');
+    <script>
+        const navItems = document.querySelectorAll('.nav-item, .sidebar-nav li');
+        const sections = document.querySelectorAll('.section');
 
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const tab = item.getAttribute('data-tab');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const tab = item.getAttribute('data-tab');
 
-        navItems.forEach(nav => nav.classList.remove('active'));
-        sections.forEach(sec => sec.classList.remove('active'));
+                // Update active states for all nav types
+                navItems.forEach(nav => {
+                    if(nav.getAttribute('data-tab') === tab) {
+                        nav.classList.add('active');
+                    } else {
+                        nav.classList.remove('active');
+                    }
+                });
 
-        item.classList.add('active');
-        document.getElementById(tab).classList.add('active');
-      });
-    });
-
-    // Handle larger screens (consoles / tablets)
-    function handleResize() {
-      const isLarge = window.innerWidth >= 768;
-      document.querySelector('.bottom-nav').style.display = isLarge ? 'none' : 'flex';
-      // You can add sidebar logic here later if needed
-    }
-
-    window.addEventListener('load', () => {
-      handleResize();
-      window.addEventListener('resize', handleResize);
-    });
-  </script>
+                // Switch sections
+                sections.forEach(sec => sec.classList.remove('active'));
+                document.getElementById(tab).classList.add('active');
+                
+                // Scroll to top on change
+                window.scrollTo(0,0);
+            });
+        });
+    </script>
 </body>
 </html>
