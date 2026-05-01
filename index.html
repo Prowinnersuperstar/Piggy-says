@@ -24,7 +24,7 @@
             min-height: 100vh;
         }
 
-        /* PC Sidebar - Hidden on mobile */
+        /* Computer Sidebar */
         .sidebar {
             display: none;
             position: fixed;
@@ -44,9 +44,9 @@
         }
 
         .sidebar .logo-area img {
-            width: 120px;
-            height: 120px;
-            border-radius: 20px; /* Matching the logo style */
+            width: 140px;
+            height: auto;
+            border-radius: 12px;
             border: 3px solid var(--accent);
         }
 
@@ -94,8 +94,8 @@
 
         .logo img {
             width: 80px;
-            height: 80px;
-            border-radius: 15px;
+            height: auto;
+            border-radius: 8px;
             border: 4px solid white;
         }
 
@@ -112,13 +112,12 @@
         main {
             padding: 20px;
             min-height: calc(100vh - 180px);
-            transition: margin-left 0.3s;
         }
 
         .section {
             display: none;
             padding: 20px 0;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -136,20 +135,19 @@
             margin: 20px 0;
         }
 
-        /* YouTube Embed Styling */
-        .video-container {
+        /* YouTube Section */
+        .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
-            max-width: 100%;
             border-radius: 16px;
+            border: 3px solid var(--accent);
             box-shadow: 0 10px 30px rgba(255, 0, 170, 0.4);
-            border: 3px solid #FF00AA;
             margin: 20px 0;
         }
 
-        .video-container iframe {
+        .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -172,12 +170,8 @@
             transition: all 0.3s ease;
         }
 
-        .yt-btn:hover {
-            transform: scale(1.08);
-            background: #cc0000;
-        }
+        .yt-btn:hover { transform: scale(1.08); background: #cc0000; }
 
-        /* Bottom Navigation (Mobile) */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -202,24 +196,12 @@
             cursor: pointer;
         }
 
-        .nav-item.active {
-            color: var(--accent);
-        }
+        .nav-item.active { color: var(--accent); }
 
-        /* Desktop Adjustments */
         @media (min-width: 768px) {
-            .bottom-nav {
-                display: none;
-            }
-            .sidebar {
-                display: block;
-            }
-            main {
-                margin-left: 260px;
-            }
-            header {
-                margin-left: 260px;
-            }
+            .bottom-nav { display: none; }
+            .sidebar { display: block; }
+            main, header { margin-left: 260px; }
         }
     </style>
 </head>
@@ -227,8 +209,7 @@
 
     <nav class="sidebar">
         <div class="logo-area">
-            <img src="Screenshot 2026-03-22 131130.png" alt="Piggy Says Logo">
-            <h2 style="margin-top: 15px; color: var(--accent);">Piggy Says</h2>
+            <img src="image_7663df.png" alt="Logo">
         </div>
         <ul class="sidebar-nav">
             <li class="active" data-tab="home"><span>🏠</span> Home</li>
@@ -239,59 +220,37 @@
 
     <header>
         <div class="logo">
-            <img src="Screenshot 2026-03-22 131130.png" alt="Piggy Says Logo">
+            <img src="image_7663df.png" alt="Logo">
             <h1>Piggy Says</h1>
         </div>
-        <p class="subtitle">Welcome to the sub!</p>
+        <p class="subtitle">sub!</p>
     </header>
 
     <main>
         <section id="home" class="section active">
-            <h2>Welcome to Piggy Says! 🐷</h2>
-            <div class="empty-placeholder">
-                Main content coming soon...
-            </div>
+            ## Welcome to Piggy Says! 🐷
+            <div class="empty-placeholder">Main content coming soon...</div>
         </section>
 
         <section id="events" class="section">
-            <h2>Upcoming Events 🎉</h2>
-            <div class="empty-placeholder">
-                Event schedule coming soon!
-            </div>
+            ## Upcoming Events 🎉
+            <div class="empty-placeholder">Event schedule coming soon!</div>
         </section>
 
         <section id="youtube" class="section" style="text-align: center;">
-            <h2>Watch Piggy on YouTube</h2>
-            
-            <div class="video-container">
-                <iframe 
-                    src="https://www.youtube.com/embed?listType=user_uploads&list=PagPagsays" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+            ## Watch Piggy on YouTube
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/https://www.youtube.com/watch?v=3Zb3smwT-dk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-
-            <a href="https://youtube.com/@PagPagsays" class="yt-btn" target="_blank">
-                ▶️ Subscribe to @PagPagsays
-            </a>
+            <a href="https://youtube.com/@PagPagsays" class="yt-btn" target="_blank">▶️ Subscribe to @PagPagsays</a>
             <p>Join the fun — new videos dropping regularly!</p>
         </section>
     </main>
 
     <nav class="bottom-nav">
-        <div class="nav-item active" data-tab="home">
-            <span>🏠</span>
-            Home
-        </div>
-        <div class="nav-item" data-tab="events">
-            <span>🎉</span>
-            Events
-        </div>
-        <div class="nav-item" data-tab="youtube">
-            <span>📺</span>
-            YouTube
-        </div>
+        <div class="nav-item active" data-tab="home"><span>🏠</span>Home</div>
+        <div class="nav-item" data-tab="events"><span>🎉</span>Events</div>
+        <div class="nav-item" data-tab="youtube"><span>📺</span>YouTube</div>
     </nav>
 
     <script>
@@ -301,22 +260,11 @@
         navItems.forEach(item => {
             item.addEventListener('click', () => {
                 const tab = item.getAttribute('data-tab');
-
-                // Update active states for all nav types
-                navItems.forEach(nav => {
-                    if(nav.getAttribute('data-tab') === tab) {
-                        nav.classList.add('active');
-                    } else {
-                        nav.classList.remove('active');
-                    }
-                });
-
-                // Switch sections
-                sections.forEach(sec => sec.classList.remove('active'));
-                document.getElementById(tab).classList.add('active');
+                navItems.forEach(n => n.classList.remove('active'));
+                sections.forEach(s => s.classList.remove('active'));
                 
-                // Scroll to top on change
-                window.scrollTo(0,0);
+                document.querySelectorAll(`[data-tab="${tab}"]`).forEach(n => n.classList.add('active'));
+                document.getElementById(tab).classList.add('active');
             });
         });
     </script>
