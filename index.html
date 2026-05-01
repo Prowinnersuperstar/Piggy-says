@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Piggy Says</title>
     <style>
+        /* ... (keep your existing styles here) ... */
+        /* Including your provided CSS unchanged for brevity */
         :root {
             --primary: #8B00FF;
             --accent: #FF00AA;
@@ -221,10 +223,10 @@
     </style>
 </head>
 <body>
-
+    <!-- Sidebar -->
     <nav class="sidebar">
         <div class="logo-container" style="flex-direction: column;">
-            <img src="/attachments/IMG_20260429_225824.jpg" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
+            <img src="https://your-image-url.com/your-image.jpg" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
             <h2 style="margin-top:10px">Piggy Says</h2>
         </div>
         <div class="sidebar-nav-item active" data-tab="home"><span>🏠</span> Home</div>
@@ -232,14 +234,16 @@
         <div class="sidebar-nav-item" data-tab="youtube"><span>📺</span> YouTube</div>
     </nav>
 
+    <!-- Header -->
     <header>
         <div class="logo-container">
-            <img src="/attachments/IMG_20260429_225824.jpg" alt="Piggy Says Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
+            <img src="https://your-image-url.com/your-image.jpg" alt="Piggy Says Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
             <h1>Piggy Says</h1>
         </div>
         <p class="subtitle">Welcome to the sub!</p>
     </header>
 
+    <!-- Main Content -->
     <main>
         <section id="home" class="section active">
             <h2>Welcome to Piggy Says! 🐷</h2>
@@ -257,10 +261,60 @@
 
         <section id="youtube" class="section" style="text-align: center;">
             <h2>Watch Piggy on YouTube</h2>
-            
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=PagPagsays" frameborder="0" allowfullscreen></iframe>
             </div>
-
             <a href="https://youtube.com/@PagPagsays" class="yt-btn" target="_blank">
                 ▶️ Subscribe to @PagPags
+            </a>
+        </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" data-tab="home">
+            <span>🏠</span> Home
+        </div>
+        <div class="nav-item" data-tab="events">
+            <span>🎉</span> Events
+        </div>
+        <div class="nav-item" data-tab="youtube">
+            <span>📺</span> YouTube
+        </div>
+    </div>
+
+    <!-- JavaScript to handle tab switching -->
+    <script>
+        // Select all navigation items
+        const navItems = document.querySelectorAll('.sidebar-nav-item, .bottom-nav .nav-item');
+        const sections = document.querySelectorAll('.section');
+
+        // Loop through each nav item and add click event
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetTab = item.getAttribute('data-tab');
+
+                // Remove active class from all nav items
+                navItems.forEach(i => i.classList.remove('active'));
+
+                // Add active class to the clicked item
+                item.classList.add('active');
+
+                // Show/hide sections
+                sections.forEach(section => {
+                    if (section.id === targetTab) {
+                        section.classList.add('active');
+                    } else {
+                        section.classList.remove('active');
+                    }
+                });
+
+                // Also update sidebar active state
+                document.querySelectorAll('.sidebar .sidebar-nav-item').forEach(i => {
+                    i.classList.toggle('active', i.getAttribute('data-tab') === targetTab);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
