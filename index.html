@@ -5,298 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Piggy Says</title>
 <style>
-    :root {
-        --primary: #8B00FF;
-        --accent: #FF00AA;
-        --bg: #0f0f0f;
-        --sidebar-width: 260px;
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: 'Segoe UI', system-ui, sans-serif;
-        background: var(--bg);
-        color: white;
-        min-height: 100vh;
-    }
-
-    /* Header */
-    header {
-        background: linear-gradient(135deg, var(--primary), #6a00cc);
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(139, 0, 255, 0.3);
-    }
-
-    .logo-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        margin-bottom: 5px;
-    }
-
-    .logo-img {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        border: 3px solid white;
-        object-fit: cover;
-    }
-
-    h1 {
-        font-size: 2.2rem;
-        font-weight: bold;
-    }
-
-    .subtitle {
-        color: #ffccff;
-        font-size: 1.1rem;
-    }
-
-    /* Sidebar (PC Only) */
-    .sidebar {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: var(--sidebar-width);
-        background: #1a1a1a;
-        padding: 30px 20px;
-        border-right: 1px solid #333;
-        z-index: 1001;
-    }
-
-    .sidebar h2 {
-        margin-bottom: 30px;
-        text-align: center;
-        color: var(--accent);
-    }
-
-    .sidebar-nav-item {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        padding: 15px;
-        color: #aaa;
-        text-decoration: none;
-        border-radius: 12px;
-        margin-bottom: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .sidebar-nav-item:hover {
-        background: #252525;
-        color: white;
-    }
-
-    .sidebar-nav-item.active {
-        background: var(--primary);
-        color: white;
-    }
-
-    /* Main Content */
-    main {
-        padding: 20px;
-        padding-bottom: 80px; /* Space for mobile nav */
-        transition: margin-left 0.3s;
-    }
-
-    .section {
-        display: none;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .section.active {
-        display: block;
-        animation: fadeIn 0.4s ease;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .empty-placeholder {
-        text-align: center;
-        padding: 60px 20px;
-        color: #888;
-        font-size: 1.1rem;
-        border: 2px dashed #444;
-        border-radius: 16px;
-        margin: 20px 0;
-    }
-
-    /* YouTube Section */
-    .video-container {
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-        height: 0;
-        overflow: hidden;
-        max-width: 100%;
-        background: #000;
-        border-radius: 16px;
-        border: 3px solid var(--accent);
-        margin: 20px 0;
-        box-shadow: 0 10px 30px rgba(255, 0, 170, 0.4);
-    }
-
-    .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    .yt-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
-        background: #FF0000;
-        color: white;
-        padding: 16px 32px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.2rem;
-        margin: 20px 0;
-        transition: all 0.3s ease;
-    }
-
-    .yt-btn:hover {
-        transform: scale(1.08);
-        background: #cc0000;
-    }
-
-    /* Bottom Navigation (Mobile Only) */
-    .bottom-nav {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(15, 15, 15, 0.97);
-        backdrop-filter: blur(10px);
-        border-top: 1px solid #333;
-        display: flex;
-        justify-content: space-around;
-        padding: 8px 0 12px;
-        z-index: 1000;
-    }
-
-    .nav-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: #aaa;
-        font-size: 0.85rem;
-        padding: 6px;
-        cursor: pointer;
-    }
-
-    .nav-item.active {
-        color: var(--accent);
-    }
-
-    .nav-item span {
-        font-size: 1.5rem;
-        margin-bottom: 2px;
-    }
-
-    /* Responsive Logic */
-    @media (min-width: 768px) {
-        .bottom-nav { display: none; }
-        .sidebar { display: block; }
-        main { margin-left: var(--sidebar-width); padding-bottom: 20px; }
-        header { margin-left: var(--sidebar-width); }
-    }
+  /* ... (your previous CSS here, unchanged) ... */
+  :root { --primary: #8B00FF; --accent: #FF00AA; --bg: #0f0f0f; --sidebar-width: 260px; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: white; min-height: 100vh; }
+  header { background: linear-gradient(135deg, var(--primary), #6a00cc); padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(139, 0, 255, 0.3); }
+  .logo-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px; }
+  .logo-img { width: 60px; height: 60px; border-radius: 50%; border: 3px solid white; object-fit: cover; }
+  h1 { font-size: 2.2rem; font-weight: bold; }
+  .subtitle { color: #ffccff; font-size: 1.1rem; }
+  .sidebar { display: none; position: fixed; left: 0; top: 0; bottom: 0; width: var(--sidebar-width); background: #1a1a1a; padding: 30px 20px; border-right: 1px solid #333; z-index: 1001; }
+  .sidebar h2 { margin-bottom: 30px; text-align: center; color: var(--accent); }
+  .sidebar-nav-item { display: flex; align-items: center; gap: 15px; padding: 15px; color: #aaa; text-decoration: none; border-radius: 12px; margin-bottom: 10px; cursor: pointer; transition: 0.3s; }
+  .sidebar-nav-item:hover { background: #252525; color: white; }
+  .sidebar-nav-item.active { background: var(--primary); color: white; }
+  main { padding: 20px; padding-bottom: 80px; transition: margin-left 0.3s; }
+  .section { display: none; max-width: 800px; margin: 0 auto; }
+  .section.active { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .empty-placeholder { text-align: center; padding: 60px 20px; color: #888; font-size: 1.1rem; border: 2px dashed #444; border-radius: 16px; margin: 20px 0; }
+  .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 16px; border: 3px solid var(--accent); margin: 20px 0; box-shadow: 0 10px 30px rgba(255, 0, 170, 0.4); }
+  .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+  .yt-btn { display: inline-flex; align-items: center; gap: 12px; background: #FF0000; color: white; padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.2rem; margin: 20px 0; transition: all 0.3s ease; }
+  .yt-btn:hover { transform: scale(1.08); background: #cc0000; }
+  .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(15, 15, 15, 0.97); backdrop-filter: blur(10px); border-top: 1px solid #333; display: flex; justify-content: space-around; padding: 8px 0 12px; z-index: 1000; }
+  .nav-item { display: flex; flex-direction: column; align-items: center; color: #aaa; font-size: 0.85rem; padding: 6px; cursor: pointer; }
+  .nav-item.active { color: var(--accent); }
+  .nav-item span { font-size: 1.5rem; margin-bottom: 2px; }
+  @media (min-width: 768px) { .bottom-nav { display: none; } .sidebar { display: block; } main { margin-left: var(--sidebar-width); padding-bottom: 20px; } header { margin-left: var(--sidebar-width); } }
 </style>
 </head>
 <body>
 
 <!-- Sidebar -->
 <nav class="sidebar">
-    <div class="logo-container" style="flex-direction: column;">
-        <img src="https://via.placeholder.com/80/8B00FF/FFFFFF?text=P" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
-        <h2 style="margin-top:10px">Piggy Says</h2>
-    </div>
-    <div class="sidebar-nav-item active" data-tab="home"><span>🏠</span> Home</div>
-    <div class="sidebar-nav-item" data-tab="events"><span>🎉</span> Events</div>
-    <div class="sidebar-nav-item" data-tab="youtube"><span>📺</span> YouTube</div>
+  <div class="logo-container" style="flex-direction: column;">
+    <!-- Replace src with your actual logo image URL -->
+    <img src="https://via.placeholder.com/80/8B00FF/FFFFFF?text=P" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
+    <h2 style="margin-top:10px">Piggy Says</h2>
+  </div>
+  <div class="sidebar-nav-item active" data-tab="home"><span>🏠</span> Home</div>
+  <div class="sidebar-nav-item" data-tab="events"><span>🎉</span> Events</div>
+  <div class="sidebar-nav-item" data-tab="youtube"><span>📺</span> YouTube</div>
 </nav>
 
 <!-- Header -->
 <header>
-    <div class="logo-container">
-        <img src="https://via.placeholder.com/80/8B00FF/FFFFFF?text=P" alt="Piggy Says Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
-        <h1>Piggy Says</h1>
-    </div>
-    <p class="subtitle">Welcome to the sub!</p>
+  <div class="logo-container">
+    <!-- Replace src with your actual logo image URL -->
+    <img src="https://via.placeholder.com/80/8B00FF/FFFFFF?text=P" alt="Piggy Says Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
+    <h1>Piggy Says</h1>
+  </div>
+  <p class="subtitle">Welcome to the sub!</p>
 </header>
 
 <!-- Main Content -->
 <main>
-    <section id="home" class="section active">
-        <h2>Welcome to Piggy Says! 🐷</h2>
-        <div class="empty-placeholder">
-            Main content coming soon...
-        </div>
-    </section>
-
-    <section id="events" class="section">
-        <h2>Upcoming Events 🎉</h2>
-        <div class="empty-placeholder">
-            Event schedule coming soon!
-        </div>
-    </section>
-
-    <section id="youtube" class="section" style="text-align: center;">
-        <h2>Watch Piggy on YouTube</h2>
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=PagPagsays" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <a href="https://youtube.com/@PagPags" class="yt-btn" target="_blank">
-            ▶️ Subscribe to @PagPags
-        </a>
-    </section>
+  <section id="home" class="section active">
+    <h2>Welcome to Piggy Says! 🐷</h2>
+    <div class="empty-placeholder">Main content coming soon...</div>
+  </section>
+  <section id="events" class="section">
+    <h2>Upcoming Events 🎉</h2>
+    <div class="empty-placeholder">Event schedule coming soon!</div>
+  </section>
+  <section id="youtube" class="section" style="text-align: center;">
+    <h2>Watch Piggy on YouTube</h2>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=PagPagsays" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <!-- Remove href or prevent default in script -->
+    <a href="#" class="yt-btn" id="subscribeBtn">
+      ▶️ Subscribe to @PagPags
+    </a>
+  </section>
 </main>
 
 <!-- Bottom Navigation -->
 <div class="bottom-nav">
-    <div class="nav-item active" data-tab="home">
-        <span>🏠</span> Home
-    </div>
-    <div class="nav-item" data-tab="events">
-        <span>🎉</span> Events
-    </div>
-    <div class="nav-item" data-tab="youtube">
-        <span>📺</span> YouTube
-    </div>
+  <div class="nav-item active" data-tab="home"><span>🏠</span> Home</div>
+  <div class="nav-item" data-tab="events"><span>🎉</span> Events</div>
+  <div class="nav-item" data-tab="youtube"><span>📺</span> YouTube</div>
 </div>
 
-<!-- JavaScript for tab switching -->
+<!-- Script for tab switching -->
 <script>
-  // Select all nav items from sidebar and bottom nav
+  // Select all nav items
   const navItems = document.querySelectorAll('.sidebar .sidebar-nav-item, .bottom-nav .nav-item');
-  // Sections
   const sections = document.querySelectorAll('.section');
 
+  // Add event listeners
   navItems.forEach(item => {
-    item.addEventListener('click', () => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault(); // prevent link navigation if any
       const targetTab = item.getAttribute('data-tab');
 
       // Remove active class from all nav items
       navItems.forEach(i => i.classList.remove('active'));
-
-      // Add active to clicked item
+      // Add active class to clicked item
       item.classList.add('active');
 
       // Show/hide sections
@@ -304,11 +110,17 @@
         section.classList.toggle('active', section.id === targetTab);
       });
 
-      // Update sidebar active state
+      // Update sidebar active class
       document.querySelectorAll('.sidebar .sidebar-nav-item').forEach(i => {
         i.classList.toggle('active', i.getAttribute('data-tab') === targetTab);
       });
     });
+  });
+
+  // Optional: prevent default for subscribe button
+  document.getElementById('subscribeBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.open('https://youtube.com/@PagPags', '_blank');
   });
 </script>
 
