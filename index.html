@@ -1,3 +1,6 @@
+Here is the complete, corrected code. I have fixed the sidebar image by ensuring it has a valid source, proper centering styles, and a fallback for when the image fails to load.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Piggy Says</title>
 <style>
-    /* Keep your original styles here */
     :root {
         --primary: #8B00FF;
         --accent: #FF00AA;
@@ -48,6 +50,7 @@
         border-radius: 50%;
         border: 3px solid white;
         object-fit: cover;
+        background: #333; /* Background color shows if image is loading/transparent */
     }
 
     h1 {
@@ -74,10 +77,23 @@
         z-index: 1001;
     }
 
-    .sidebar h2 {
-        margin-bottom: 30px;
+    /* Fixed the sidebar logo alignment */
+    .sidebar .logo-container {
+        flex-direction: column;
         text-align: center;
+        margin-bottom: 30px;
+        gap: 10px;
+    }
+
+    .sidebar .logo-img {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+    }
+
+    .sidebar h2 {
         color: var(--accent);
+        font-size: 1.5rem;
     }
 
     .sidebar-nav-item {
@@ -106,7 +122,7 @@
     /* Main content styles */
     main {
         padding: 20px;
-        padding-bottom: 80px; /* space for mobile nav */
+        padding-bottom: 80px; 
         transition: margin-left 0.3s;
     }
 
@@ -223,28 +239,30 @@
 </head>
 <body>
 
-<!-- Sidebar -->
 <nav class="sidebar">
-  <div class="logo-container" style="flex-direction: column;">
-    <!-- https://yt3.ggpht.com/s9n9sHLA6ajWw0YIw_Lq2O9ZDxYOm-8rj4K8iIzP1lu9dBXnarCqNSbB0gZuVBByMFrlqhKM29k=s68-c-k-c0x00ffffff-no-rj -->
-    <img src="https://your-logo-url.com/logo.png" alt="Piggy Says Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
-    <h2 style="margin-top:10px">Piggy Says</h2>
+  <div class="logo-container">
+    <img src="https://yt3.ggpht.com/s9n9sHLA6ajWw0YIw_Lq2O9ZDxYOm-8rj4K8iIzP1lu9dBXnarCqNSbB0gZuVBByMFrlqhKM29k=s68-c-k-c0x00ffffff-no-rj" 
+         alt="Piggy Says Logo" 
+         class="logo-img" 
+         onerror="this.src='https://via.placeholder.com/80/8B00FF/FFFFFF?text=P'">
+    <h2>Piggy Says</h2>
   </div>
   <div class="sidebar-nav-item active" data-tab="home"><span>🏠</span> Home</div>
   <div class="sidebar-nav-item" data-tab="events"><span>🎉</span> Events</div>
   <div class="sidebar-nav-item" data-tab="youtube"><span>📺</span> YouTube</div>
 </nav>
 
-<!-- Header -->
 <header>
 <div class="logo-container">
-  <img src="https://yt3.ggpht.com/s9n9sHLA6ajWw0YIw_Lq2O9ZDxYOm-8rj4K8iIzP1lu9dBXnarCqNSbB0gZuVBByMFrlqhKM29k=s68-c-k-c0x00ffffff-no-rj" alt="Piggy Says Logo" class="logo-img" />
+  <img src="https://yt3.ggpht.com/s9n9sHLA6ajWw0YIw_Lq2O9ZDxYOm-8rj4K8iIzP1lu9dBXnarCqNSbB0gZuVBByMFrlqhKM29k=s68-c-k-c0x00ffffff-no-rj" 
+       alt="Piggy Says Logo" 
+       class="logo-img" 
+       onerror="this.src='https://via.placeholder.com/60/8B00FF/FFFFFF?text=P'"/>
   <h1>Piggy Says</h1>
 </div>
   <p class="subtitle">Welcome to the sub!</p>
 </header>
 
-<!-- Main Content -->
 <main>
   <section id="home" class="section active">
     <h2>Welcome to Piggy Says! 🐷</h2>
@@ -257,17 +275,14 @@
   <section id="youtube" class="section" style="text-align: center;">
     <h2>Watch Piggy on YouTube</h2>
     <div class="video-container">
-      <!-- 3Zb3smwT-dk -->
      <iframe src="https://www.youtube.com/embed/3Zb3smwT-dk" frameborder="0" allowfullscreen></iframe>
     </div>
-    <!-- Correct the channel URL -->
     <a href="https://youtube.com/@PagPagsays" class="yt-btn" target="_blank" id="subscribeBtn">
       ▶️ Subscribe to @PagPagsays
     </a>
   </section>
 </main>
 
-<!-- Bottom Navigation -->
 <div class="bottom-nav">
   <div class="nav-item active" data-tab="home"><span>🏠</span> Home</div>
   <div class="nav-item" data-tab="events"><span>🎉</span> Events</div>
@@ -275,38 +290,36 @@
 </div>
 
 <script>
-  // Your original tab switching script
   const navItems = document.querySelectorAll('.sidebar .sidebar-nav-item, .bottom-nav .nav-item');
   const sections = document.querySelectorAll('.section');
 
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
-      e.preventDefault();
       const targetTab = item.getAttribute('data-tab');
 
-      // Remove active from all
-      navItems.forEach(i => i.classList.remove('active'));
-      // Add active to clicked
-      item.classList.add('active');
+      // Update All Nav Items
+      navItems.forEach(i => {
+        if(i.getAttribute('data-tab') === targetTab) {
+            i.classList.add('active');
+        } else {
+            i.classList.remove('active');
+        }
+      });
 
       // Show/hide sections
       sections.forEach(section => {
         section.classList.toggle('active', section.id === targetTab);
       });
-
-      // Update sidebar active
-      document.querySelectorAll('.sidebar .sidebar-nav-item').forEach(i => {
-        i.classList.toggle('active', i.getAttribute('data-tab') === targetTab);
-      });
     });
   });
 
-  // Make the subscribe button open your correct channel
+  // Fixed external link handling
   document.getElementById('subscribeBtn').addEventListener('click', (e) => {
-    e.preventDefault();
-    window.open('https://youtube.com/@PagPagsays', '_blank');
+    // No need to preventDefault if it's a simple link, 
+    // but useful if you want to add tracking later.
   });
 </script>
 
 </body>
 </html>
+```
