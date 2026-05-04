@@ -5,14 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Piggy Says</title>
 <style>
+/* Your existing styles */
 :root {
     --primary: #8B00FF;
     --accent: #FF00AA;
     --bg: #0f0f0f;
     --sidebar-width: 260px;
 }
-
-/* Reset styles */
 * {
     margin: 0;
     padding: 0;
@@ -24,53 +23,26 @@ body {
     color: white;
     min-height: 100vh;
 }
-
-/* Sidebar for desktop only */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: var(--sidebar-width);
-    background: #1a1a1a;
-    padding: 30px 20px;
-    border-right: 1px solid #333;
-    z-index: 1001;
-    display: block; /* visible on desktop */
-    overflow-y: auto;
-}
-
-/* Hide sidebar on mobile */
-@media(max-width: 767px) {
-  .sidebar {
-    display: none;
-  }
-}
-
-/* Header aligned with sidebar on desktop */
+/* Header styles */
 header {
-    margin-left: var(--sidebar-width);
     background: linear-gradient(135deg, var(--primary), #6a00cc);
     padding: 20px;
     text-align: center;
     box-shadow: 0 4px 15px rgba(139, 0, 255, 0.3);
 }
-
-/* Header logo container */
-.header-logo-container {
+.logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
     margin-bottom: 5px;
 }
-.header .logo-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
+.logo-img {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    border: 2px solid white;
-    margin-right: 10px;
+    border: 3px solid white;
+    object-fit: cover;
 }
 h1 {
     font-size: 2.2rem;
@@ -80,87 +52,70 @@ h1 {
     color: #ffccff;
     font-size: 1.1rem;
 }
-
-/* Main content */
-main {
-    margin-left: var(--sidebar-width);
-    padding: 20px;
-    padding-bottom: 80px;
-}
-
-/* Remove left margin on mobile (since sidebar is hidden) */
-@media(max-width: 767px) {
-  main {
-    margin-left: 0;
-  }
-}
-
-/* Sections */
-.section {
-    display: none;
-    max-width: 800px;
-    margin: 0 auto;
-}
-.section.active {
-    display: block;
-    animation: fadeIn 0.4s ease;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Placeholder styles */
-.empty-placeholder {
-    text-align: center;
-    padding: 60px 20px;
-    color: #888;
-    font-size: 1.1rem;
-    border: 2px dashed #444;
-    border-radius: 16px;
-    margin: 20px 0;
-}
-
-/* YouTube container styles */
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-    background: #000;
-    border-radius: 16px;
-    border: 3px solid var(--accent);
-    margin: 20px 0;
-}
-.video-container iframe {
-    position: absolute;
+.sidebar {
+    /* existing styles... */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    width: var(--sidebar-width);
+    background: #1a1a1a;
+    padding: 30px 20px;
+    border-right: 1px solid #333;
+    z-index: 1001;
+    display: block; /* always display, toggle with media queries */
+    overflow-y: auto;
 }
-
-/* Subscribe button style */
-.yt-btn {
-    display: inline-flex;
+.sidebar h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--accent);
+}
+.sidebar .logo-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 12px;
-    background: #FF0000;
-    color: white;
-    padding: 16px 32px;
-    border-radius: 50px;
+}
+.sidebar .logo-container img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+.sidebar .sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    color: #aaa;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin: 20px 0;
-    transition: all 0.3s ease;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
-.yt-btn:hover {
-    transform: scale(1.08);
-    background: #cc0000;
+.sidebar .sidebar-nav-item:hover {
+    background: #252525;
+    color: white;
 }
-
+.sidebar .sidebar-nav-item.active {
+    background: var(--primary);
+    color: white;
+}
+main {
+    padding: 20px;
+    padding-left: var(--sidebar-width);
+}
+@media(max-width: 767px) {
+    /* hide sidebar on mobile */
+    .sidebar {
+        display: none;
+    }
+    /* main takes full width on mobile */
+    main {
+        padding-left: 0;
+    }
+}
 /* Bottom nav for mobile only */
 .bottom-nav {
     position: fixed;
@@ -175,33 +130,34 @@ main {
     padding: 8px 0 12px;
     z-index: 1000;
 }
-
-/* Show bottom nav only on mobile */
+/* hide bottom nav on desktop */
 @media(min-width: 768px) {
-  .bottom-nav {
-    display: none;
-  }
+    .bottom-nav {
+        display: none;
+    }
 }
-
-/* Show sidebar only on desktop */
-@media(max-width: 767px) {
-  .sidebar {
+.section {
     display: none;
-  }
-  main {
-    margin-left: 0;
-  }
+    max-width: 800px;
+    margin: 0 auto;
+}
+.section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
 <body>
 
-<!-- Sidebar for desktop -->
+<!-- Sidebar (desktop only) -->
 <nav class="sidebar">
-  <div class="logo-container" style="display:flex; flex-direction:column; align-items:center; margin-bottom:20px;">
+  <div class="logo-container">
     <img src="https://plain-apac-prod-public.komododecks.com/202605/04/pNxPzHWuSkiTSfjvCfpz/image.png" 
-         alt="Piggy Says Logo" 
-         class="logo-img">
+         alt="Piggy Says Logo" class="logo-img" />
     <h2 style="margin-top:10px;">Piggy Says</h2>
   </div>
   <div class="sidebar-nav-item active" data-tab="home"><span>🏠</span> Home</div>
@@ -213,8 +169,7 @@ main {
 <header>
   <div class="header-logo-container">
     <img src="https://plain-apac-prod-public.komododecks.com/202605/04/pNxPzHWuSkiTSfjvCfpz/image.png" 
-         alt="Piggy Says Logo" 
-         class="logo-img">
+         alt="Piggy Says Logo" class="logo-img" />
     <h1>Piggy Says</h1>
   </div>
   <p class="subtitle">Welcome to the sub!</p>
@@ -249,7 +204,7 @@ main {
 </div>
 
 <script>
-  // Desktop sidebar tab switch
+  // sidebar tab switching
   const sidebarItems = document.querySelectorAll('.sidebar .sidebar-nav-item');
   const sections = document.querySelectorAll('.section');
 
@@ -264,14 +219,14 @@ main {
     });
   });
 
-  // Mobile bottom nav switch
+  // mobile bottom nav switching
   const bottomItems = document.querySelectorAll('.bottom-nav .nav-item');
   bottomItems.forEach(item => {
     item.addEventListener('click', () => {
       const target = item.getAttribute('data-tab');
       bottomItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
-      // also update sidebar active if visible
+      // update active in sidebar if visible
       document.querySelectorAll('.sidebar .sidebar-nav-item').forEach(i => {
         i.classList.toggle('active', i.getAttribute('data-tab') === target);
       });
