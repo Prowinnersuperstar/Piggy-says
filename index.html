@@ -61,7 +61,6 @@ h1 {
     padding: 30px 20px;
     border-right: 1px solid #333;
     z-index: 1001;
-    display: block;
     overflow-y: auto;
 }
 .sidebar h2 {
@@ -131,24 +130,37 @@ main {
         display: none;
     }
 }
-/* Larger video container for prominence */
+/* Sections hidden by default, shown when active */
+.section {
+    display: none;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.section.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* Larger video container for visibility */
 .video-container {
     position: relative;
-    padding-bottom: 56.25%; /* default aspect ratio 16:9 */
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
     height: 0;
     overflow: hidden;
     max-width: 100%;
     background: #000;
     border-radius: 16px;
     border: 3px solid var(--accent);
-    margin: 20px auto; /* center the video */
+    margin: 20px auto;
 }
 @media(max-width: 767px) {
   .video-container {
-    padding-bottom: 80%; /* larger height for small screens */
+    padding-bottom: 80%; /* Larger height for small screens */
   }
 }
-/* Make the iframe fill the container */
 .video-container iframe {
     position: absolute;
     top: 0;
@@ -156,7 +168,7 @@ main {
     width: 100%;
     height: 100%;
 }
-/* Make the button more prominent and above the fold */
+/* Make the button prominent and visible */
 #watchPagPagBtn {
     display: inline-block;
     margin: 10px auto;
@@ -180,8 +192,7 @@ main {
 <!-- Sidebar (desktop only) -->
 <nav class="sidebar">
   <div class="logo-container">
-    <img src="https://plain-apac-prod-public.komododecks.com/202605/04/pNxPzHWuSkiTSfjvCfpz/image.png" 
-         alt="Piggy Says Logo" class="logo-img" />
+    <img src="https://plain-apac-prod-public.komododecks.com/202605/04/pNxPzHWuSkiTSfjvCfpz/image.png" alt="Piggy Says Logo" class="logo-img" />
     <h2 style="margin-top:10px;">Piggy Says</h2>
   </div>
   <div class="sidebar-nav-item active" data-tab="home"><span>🏠</span> Home</div>
@@ -192,8 +203,7 @@ main {
 <!-- Header -->
 <header>
   <div class="header-logo-container">
-    <img src="https://plain-apac-prod-public.komododecks.com/202605/04/pNxPzHWuSkiTSfjvCfpz/image.png" 
-         alt="Piggy Says Logo" class="logo-img" />
+    <img src="https://plain-apac-prod-public.komododecks.com/202605/04/pNxPzHWuSkiTSfjvCfpz/image.png" alt="Piggy Says Logo" class="logo-img" />
     <h1>Piggy Says</h1>
   </div>
   <p class="subtitle">Welcome to the sub!</p>
@@ -211,11 +221,11 @@ main {
   </section>
   <section id="pagpagtv" class="section" style="text-align: center;">
     <h2>Pag Pag TV</h2>
-    <!-- Larger video for better visibility -->
+    <!-- Larger video for visibility -->
     <div class="video-container">
       <iframe src="https://streamable.com/e/erlwfl" frameborder="0" allowfullscreen></iframe>
     </div>
-    <!-- Prominent button above the fold -->
+    <!-- Prominent, above-the-fold button -->
     <a href="https://prowinnersuperstar.github.io/Piggy-TV/" class="yt-btn" target="_blank" id="watchPagPagBtn">
       Watch Pag Pag TV
     </a>
@@ -230,7 +240,7 @@ main {
 </div>
 
 <script>
-  // Desktop sidebar tab switch
+  // Desktop tab switch
   const sidebarItems = document.querySelectorAll('.sidebar .sidebar-nav-item');
   const sections = document.querySelectorAll('.section');
 
@@ -245,14 +255,14 @@ main {
     });
   });
 
-  // Mobile bottom nav switch
+  // Mobile tab switch
   const bottomItems = document.querySelectorAll('.bottom-nav .nav-item');
   bottomItems.forEach(item => {
     item.addEventListener('click', () => {
       const target = item.getAttribute('data-tab');
       bottomItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
-      // update active in sidebar if visible
+      // sync sidebar active if visible
       document.querySelectorAll('.sidebar .sidebar-nav-item').forEach(i => {
         i.classList.toggle('active', i.getAttribute('data-tab') === target);
       });
@@ -262,7 +272,7 @@ main {
     });
   });
 
-  // Make the "Watch Pag Pag TV" button open the new link
+  // Button opens new link
   document.getElementById('watchPagPagBtn').addEventListener('click', (e) => {
     e.preventDefault();
     window.open('https://prowinnersuperstar.github.io/Piggy-TV/', '_blank');
