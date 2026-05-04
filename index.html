@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Piggy Says</title>
 <style>
-/* Your existing styles */
+/* Your existing styles, with added media queries for responsiveness */
 :root {
     --primary: #8B00FF;
     --accent: #FF00AA;
@@ -53,7 +53,7 @@ h1 {
     font-size: 1.1rem;
 }
 .sidebar {
-    /* existing styles... */
+    /* fixed on desktop only */
     position: fixed;
     top: 0;
     left: 0;
@@ -63,7 +63,7 @@ h1 {
     padding: 30px 20px;
     border-right: 1px solid #333;
     z-index: 1001;
-    display: block; /* always display, toggle with media queries */
+    display: block; /* toggle with media queries */
     overflow-y: auto;
 }
 .sidebar h2 {
@@ -111,7 +111,6 @@ main {
     .sidebar {
         display: none;
     }
-    /* main takes full width on mobile */
     main {
         padding-left: 0;
     }
@@ -186,9 +185,9 @@ main {
     <div class="empty-placeholder">Event schedule coming soon!</div>
   </section>
   <section id="youtube" class="section" style="text-align: center;">
-    <h2>Watch Piggy on YouTube</h2>
+    <h2>Watch Piggy on Streamable</h2>
     <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/3Zb3smwT-dk" frameborder="0" allowfullscreen></iframe>
+      <iframe src="https://streamable.com/e/erlwfl" frameborder="0" allowfullscreen></iframe>
     </div>
     <a href="https://youtube.com/@PagPagsays" class="yt-btn" target="_blank" id="subscribeBtn">
       ▶️ Subscribe to @PagPagsays
@@ -204,7 +203,7 @@ main {
 </div>
 
 <script>
-  // sidebar tab switching
+  // Desktop sidebar tab switch
   const sidebarItems = document.querySelectorAll('.sidebar .sidebar-nav-item');
   const sections = document.querySelectorAll('.section');
 
@@ -219,14 +218,14 @@ main {
     });
   });
 
-  // mobile bottom nav switching
+  // Mobile bottom nav switch
   const bottomItems = document.querySelectorAll('.bottom-nav .nav-item');
   bottomItems.forEach(item => {
     item.addEventListener('click', () => {
       const target = item.getAttribute('data-tab');
       bottomItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
-      // update active in sidebar if visible
+      // update sidebar active if visible
       document.querySelectorAll('.sidebar .sidebar-nav-item').forEach(i => {
         i.classList.toggle('active', i.getAttribute('data-tab') === target);
       });
