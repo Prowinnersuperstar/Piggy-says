@@ -148,6 +148,31 @@ main {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+/* Make the video larger */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* default aspect ratio 16:9 */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000;
+    border-radius: 16px;
+    border: 3px solid var(--accent);
+    margin: 20px 0;
+}
+/* Larger video - increase padding-bottom for bigger size */
+@media(max-width: 767px) {
+  .video-container {
+    padding-bottom: 80%; /* larger height for small screens */
+  }
+}
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 </style>
 </head>
 <body>
@@ -161,7 +186,7 @@ main {
   </div>
   <div class="sidebar-nav-item active" data-tab="home"><span>🏠</span> Home</div>
   <div class="sidebar-nav-item" data-tab="events"><span>🎉</span> Events</div>
-  <div class="sidebar-nav-item" data-tab="youtube"><span>📺</span> YouTube</div>
+  <div class="sidebar-nav-item" data-tab="pagpagtv"><span>📺</span> Pag Pag TV</div>
 </nav>
 
 <!-- Header -->
@@ -184,13 +209,14 @@ main {
     <h2>Upcoming Events 🎉</h2>
     <div class="empty-placeholder">Event schedule coming soon!</div>
   </section>
-  <section id="youtube" class="section" style="text-align: center;">
-    <h2>Watch Piggy on Streamable</h2>
+  <section id="pagpagtv" class="section" style="text-align: center;">
+    <h2>Pag Pag TV</h2>
     <div class="video-container">
       <iframe src="https://streamable.com/e/erlwfl" frameborder="0" allowfullscreen></iframe>
     </div>
-    <a href="https://youtube.com/@PagPagsays" class="yt-btn" target="_blank" id="subscribeBtn">
-      ▶️ Subscribe to @PagPagsays
+    <!-- Changed button text and link -->
+    <a href="https://prowinnersuperstar.github.io/Piggy-TV/" class="yt-btn" target="_blank" id="watchPagPagBtn">
+      Watch Pag Pag TV
     </a>
   </section>
 </main>
@@ -199,7 +225,7 @@ main {
 <div class="bottom-nav">
   <div class="nav-item active" data-tab="home"><span>🏠</span> Home</div>
   <div class="nav-item" data-tab="events"><span>🎉</span> Events</div>
-  <div class="nav-item" data-tab="youtube"><span>📺</span> YouTube</div>
+  <div class="nav-item" data-tab="pagpagtv"><span>📺</span> Pag Pag TV</div>
 </div>
 
 <script>
@@ -225,7 +251,7 @@ main {
       const target = item.getAttribute('data-tab');
       bottomItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
-      // update sidebar active if visible
+      // update active in sidebar if visible
       document.querySelectorAll('.sidebar .sidebar-nav-item').forEach(i => {
         i.classList.toggle('active', i.getAttribute('data-tab') === target);
       });
@@ -235,9 +261,9 @@ main {
     });
   });
 
-  document.getElementById('subscribeBtn').addEventListener('click', (e) => {
+  document.getElementById('watchPagPagBtn').addEventListener('click', (e) => {
     e.preventDefault();
-    window.open('https://youtube.com/@PagPagsays', '_blank');
+    window.open('https://prowinnersuperstar.github.io/Piggy-TV/', '_blank');
   });
 </script>
 
